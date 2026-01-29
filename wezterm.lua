@@ -100,12 +100,12 @@ config.keys = {
 
 	-- 分屏操作 (Shift + Mod + \ 或 -)
 	{
-		key = "\\",
+		key = "|",
 		mods = mod .. "|SHIFT",
 		action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }),
 	},
 	{
-		key = "-",
+		key = "_",
 		mods = mod .. "|SHIFT",
 		action = act.SplitVertical({ domain = "CurrentPaneDomain" }),
 	},
