@@ -22,7 +22,7 @@ config.font = wezterm.font_with_fallback({
 	"Fira Code",
 	"Consolas",
 })
-config.font_size = is_mac and 14.0 or 11.0
+config.font_size = is_mac and 15.5 or 11.0
 
 -- [修改点 1] 窗口样式：加入 INTEGRATED_BUTTONS
 -- 这会在标签栏显示原生按钮，从而支持双击空白区域最大化/还原
