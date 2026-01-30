@@ -60,7 +60,7 @@ end
 -- 窗口管理类操作：Mac 用 CMD，Windows 用 ALT (避免冲突)
 local mod = is_mac and "SUPER" or "ALT"
 
-config.keys = {
+local keys = {
 	-- [修改点 2] 智能 Ctrl+C (Smart Copy/Interrupt)
 	-- 有选中文字 -> 复制；无选中文字 -> 发送 Ctrl+C 中断
 	{
@@ -111,10 +111,10 @@ config.keys = {
 	},
 
 	-- 面板导航
-	{ key = "LeftArrow", mods = mod, action = act.ActivatePaneDirection("Left") },
-	{ key = "RightArrow", mods = mod, action = act.ActivatePaneDirection("Right") },
-	{ key = "UpArrow", mods = mod, action = act.ActivatePaneDirection("Up") },
-	{ key = "DownArrow", mods = mod, action = act.ActivatePaneDirection("Down") },
+	{ key = "LeftArrow", mods = "SHIFT", action = act.ActivatePaneDirection("Left") },
+	{ key = "RightArrow", mods = "SHIFT", action = act.ActivatePaneDirection("Right") },
+	{ key = "UpArrow", mods = "SHIFT", action = act.ActivatePaneDirection("Up") },
+	{ key = "DownArrow", mods = "SHIFT", action = act.ActivatePaneDirection("Down") },
 
 	-- 调整面板大小
 	{ key = "LeftArrow", mods = mod .. "|SHIFT", action = act.AdjustPaneSize({ "Left", 5 }) },
@@ -126,10 +126,35 @@ config.keys = {
 	{ key = "p", mods = mod .. "|SHIFT", action = act.ActivateCommandPalette },
 
 	-- 按下 Ctrl+Shift+Space 呼出快速选择
-	{ key = "Space", mods = "CTRL|SHIFT", action = act.QuickSelect },
+	{ key = "Space", mods = mod .. "|SHIFT", action = act.QuickSelect },
 	-- 激活复制模式
 	{ key = "x", mods = "CTRL|SHIFT", action = act.ActivateCopyMode },
 }
+
+if is_mac then
+	table.insert(keys, {
+		key = "LeftArrow",
+		mods = "OPT",
+		action = act.SendKey({ key = "LeftArrow", mods = "CTRL" }),
+	})
+	table.insert(keys, {
+		key = "RightArrow",
+		mods = "OPT",
+		action = act.SendKey({ key = "RightArrow", mods = "CTRL" }),
+	})
+	table.insert(keys, {
+		key = "UpArrow",
+		mods = "OPT",
+		action = act.SendKey({ key = "UpArrow", mods = "CTRL" }),
+	})
+	table.insert(keys, {
+		key = "DownArrow",
+		mods = "OPT",
+		action = act.SendKey({ key = "DownArrow", mods = "CTRL" }),
+	})
+end
+
+config.keys = keys
 
 -- =========================================================
 --   鼠标绑定 (Mouse Bindings)
