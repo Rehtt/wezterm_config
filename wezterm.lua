@@ -103,6 +103,12 @@ local keys = {
 	{ key = "m", mods = mod .. "|SHIFT", action = act.QuickSelect },
 	-- 激活复制模式
 	{ key = "x", mods = "CTRL|SHIFT", action = act.ActivateCopyMode },
+
+	-- vim 风格的 Ctrl+hjkl 移动
+	{ key = "j", mods = "CTRL", action = act.SendKey({ key = "DownArrow" }) },
+	{ key = "k", mods = "CTRL", action = act.SendKey({ key = "UpArrow" }) },
+	{ key = "l", mods = "CTRL", action = act.SendKey({ key = "RightArrow" }) },
+	{ key = "h", mods = "CTRL", action = act.SendKey({ key = "LeftArrow" }) },
 }
 
 -- mac 系统下的额外配置
