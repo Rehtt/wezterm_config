@@ -99,8 +99,8 @@ local keys = {
 	-- 命令面板
 	{ key = "p", mods = mod .. "|SHIFT", action = act.ActivateCommandPalette },
 
-	-- 按下 Ctrl+Shift+Space 呼出快速选择
-	{ key = "Space", mods = mod .. "|SHIFT", action = act.QuickSelect },
+	-- 按下 Ctrl+Shift+m 呼出快速选择
+	{ key = "m", mods = mod .. "|SHIFT", action = act.QuickSelect },
 	-- 激活复制模式
 	{ key = "x", mods = "CTRL|SHIFT", action = act.ActivateCopyMode },
 }
