@@ -61,32 +61,6 @@ end
 local mod = is_mac and "SUPER" or "ALT"
 
 local keys = {
-	-- [修改点 2] 智能 Ctrl+C (Smart Copy/Interrupt)
-	-- 有选中文字 -> 复制；无选中文字 -> 发送 Ctrl+C 中断
-	{
-		key = "c",
-		mods = "CTRL",
-		action = wezterm.action_callback(function(window, pane)
-			local selection = window:get_selection_text_for_pane(pane)
-			if selection ~= "" then
-				window:perform_action(act.CopyTo("ClipboardAndPrimarySelection"), pane)
-				window:perform_action(act.ClearSelection, pane)
-			else
-				window:perform_action(act.SendKey({ key = "c", mods = "CTRL" }), pane)
-			end
-		end),
-	},
-
-	-- [修改点 3] 强制 Ctrl+V 粘贴
-	-- 注意：这会导致在 Vim 中 Ctrl+v 无法进入列编辑模式 (请改用 Ctrl+q)
-	{
-		key = "v",
-		mods = "CTRL",
-		action = act.PasteFrom("Clipboard"),
-	},
-
-	-- --- 以下是原有的窗口管理快捷键 ---
-
 	-- 标签页管理
 	{ key = "t", mods = mod, action = act.SpawnTab("CurrentPaneDomain") },
 	{ key = "w", mods = mod, action = act.CloseCurrentTab({ confirm = true }) },
@@ -131,6 +105,7 @@ local keys = {
 	{ key = "x", mods = "CTRL|SHIFT", action = act.ActivateCopyMode },
 }
 
+-- mac 系统下的额外配置
 if is_mac then
 	table.insert(keys, {
 		key = "LeftArrow",
@@ -151,6 +126,33 @@ if is_mac then
 		key = "DownArrow",
 		mods = "OPT",
 		action = act.SendKey({ key = "DownArrow", mods = "CTRL" }),
+	})
+end
+
+-- windows 系统下的额外配置
+if is_windows then
+	-- 强制 Ctrl+V 粘贴
+	-- 注意：这会导致在 Vim 中 Ctrl+v 无法进入列编辑模式 (请改用 Ctrl+q)
+	table.insert(keys, {
+		key = "v",
+		mods = "CTRL",
+		action = act.PasteFrom("Clipboard"),
+	})
+
+	-- 智能 Ctrl+C (Smart Copy/Interrupt)
+	-- 有选中文字 -> 复制；无选中文字 -> 发送 Ctrl+C 中断
+	table.insert(keys, {
+		key = "c",
+		mods = "CTRL",
+		action = wezterm.action_callback(function(window, pane)
+			local selection = window:get_selection_text_for_pane(pane)
+			if selection ~= "" then
+				window:perform_action(act.CopyTo("ClipboardAndPrimarySelection"), pane)
+				window:perform_action(act.ClearSelection, pane)
+			else
+				window:perform_action(act.SendKey({ key = "c", mods = "CTRL" }), pane)
+			end
+		end),
 	})
 end
 
