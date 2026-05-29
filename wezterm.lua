@@ -44,11 +44,11 @@ config.hide_tab_bar_if_only_one_tab = false
 -- =========================================================
 
 if is_windows then
-	config.default_prog = { "wsl.exe", "--distribution", "Arch" }
+	config.default_prog = { "wsl.exe"}
 	config.launch_menu = {
 		{ label = "PowerShell Core", args = { "pwsh.exe", "-NoLogo" } },
 		{ label = "Windows PowerShell", args = { "powershell.exe", "-NoLogo" } },
-		{ label = "WSL (Ubuntu)", args = { "wsl.exe", "--distribution", "Arch" } },
+		{ label = "WSL", args = { "wsl.exe" } },
 		{ label = "Command Prompt", args = { "cmd.exe" } },
 	}
 end
