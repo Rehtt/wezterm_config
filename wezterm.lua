@@ -63,6 +63,14 @@ local mod = is_mac and "SUPER" or "ALT"
 local keys = {
 	-- 标签页管理
 	{ key = "t", mods = mod, action = act.SpawnTab("CurrentPaneDomain") },
+	{
+		key = "t",
+		mods = mod .. "|SHIFT",
+		action = act.ShowLauncherArgs({
+			flags = "FUZZY|LAUNCH_MENU_ITEMS|DOMAINS",
+			title = "选择新标签页",
+		}),
+	},
 	{ key = "w", mods = mod, action = act.CloseCurrentTab({ confirm = true }) },
 	{ key = "[", mods = mod, action = act.ActivateTabRelative(-1) },
 	{ key = "]", mods = mod, action = act.ActivateTabRelative(1) },
